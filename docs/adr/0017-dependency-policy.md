@@ -10,7 +10,7 @@ The project should use production-ready libraries and avoid fragile custom imple
 
 ## Decision
 
-Use established libraries: Vite, React, TypeScript, Tailwind CSS, Zod, TanStack Query, Lucide React, Vitest, Playwright, Go stdlib packages, Testify, and DuckDB integration in the local generator.
+Use established libraries and tools: Vite, React, TypeScript, Tailwind CSS, Zod, TanStack Query, Lucide React, Vitest, Playwright, Go stdlib packages, Testify, DuckDB CLI, Apache Tika, Ollama-compatible local LLMs, and GraphViz.
 
 Dependencies must be pinned through `package-lock.json` and `go.sum`. `npm audit` and `govulncheck` are documented security checks.
 

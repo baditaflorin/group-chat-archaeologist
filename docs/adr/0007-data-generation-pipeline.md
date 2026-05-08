@@ -10,7 +10,7 @@ Mode B requires deterministic, resumable local generation of static artifacts.
 
 ## Decision
 
-`make data` runs `cmd/build-index`. The generator reads an input export, extracts text with Tika when needed, parses messages, stores analytical rows in DuckDB, performs deterministic analysis, optionally asks an Ollama-compatible local LLM for topic labels and joke summaries, renders a GraphViz graph, and writes artifacts to `docs/data/v1/`.
+`make data` runs `cmd/build-index`. The generator reads an input export, extracts text with Tika when needed, parses messages, runs analytical transforms through DuckDB, performs deterministic analysis, optionally asks an Ollama-compatible local LLM for topic labels and joke summaries, renders a GraphViz graph, and writes artifacts to `docs/data/v1/`.
 
 The generator is idempotent: outputs are written to a temporary directory and then moved into place. Artifacts include metadata with generated time, source commit, input checksum, schema version, and feature flags.
 

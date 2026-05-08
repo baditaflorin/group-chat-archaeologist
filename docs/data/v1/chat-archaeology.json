@@ -1,0 +1,641 @@
+{
+  "schemaVersion": "v1",
+  "generatedAt": "2026-05-08T08:42:38Z",
+  "repositoryUrl": "https://github.com/baditaflorin/group-chat-archaeologist",
+  "paypalUrl": "https://www.paypal.com/paypalme/florinbadita",
+  "source": {
+    "inputName": "sample_chat.txt",
+    "inputSha256": "0e6603b28c83aadb7f333629a2dd76ebe30fcd4caee2826c4cf692ccad838f7c",
+    "parser": "text",
+    "extractionMode": "txt",
+    "analyticsEngine": "duckdb-cli",
+    "messageCount": 29,
+    "memberCount": 6,
+    "firstMessageAt": "2021-01-03T07:00:00Z",
+    "lastMessageAt": "2025-06-05T13:45:00Z",
+    "llmProvider": "heuristic",
+    "llmModel": "llama3.2",
+    "llmUsed": false,
+    "sourceCommit": "f161916"
+  },
+  "members": [
+    {
+      "name": "Ana",
+      "messageCount": 7,
+      "firstMessageAt": "2021-01-03T09:00:00Z",
+      "lastMessageAt": "2025-06-05T16:40:00Z"
+    },
+    {
+      "name": "Bogdan",
+      "messageCount": 5,
+      "firstMessageAt": "2021-01-03T09:12:00Z",
+      "lastMessageAt": "2024-05-05T18:00:00Z"
+    },
+    {
+      "name": "Carmen",
+      "messageCount": 5,
+      "firstMessageAt": "2021-02-11T20:20:00Z",
+      "lastMessageAt": "2024-04-12T18:00:00Z"
+    },
+    {
+      "name": "Florin",
+      "messageCount": 5,
+      "firstMessageAt": "2021-07-19T18:25:00Z",
+      "lastMessageAt": "2025-06-05T16:45:00Z"
+    },
+    {
+      "name": "Daria",
+      "messageCount": 4,
+      "firstMessageAt": "2021-05-02T10:35:00Z",
+      "lastMessageAt": "2024-11-30T20:10:00Z"
+    },
+    {
+      "name": "Mihai",
+      "messageCount": 3,
+      "firstMessageAt": "2022-01-14T12:24:00Z",
+      "lastMessageAt": "2025-01-15T10:00:00Z"
+    }
+  ],
+  "topics": [
+    {
+      "id": "topic_2021_01",
+      "label": "Accept / An / Archive",
+      "start": "2021-01-01",
+      "end": "2021-01-31",
+      "messageCount": 3,
+      "keywords": [
+        "Accept",
+        "An",
+        "Archive",
+        "bogdan",
+        "every"
+      ],
+      "topMembers": [
+        "Ana",
+        "Bogdan"
+      ],
+      "summary": "3 messages led by Ana, Bogdan."
+    },
+    {
+      "id": "topic_2021_02",
+      "label": "First / Lighthouse / Playlist",
+      "start": "2021-02-01",
+      "end": "2021-02-28",
+      "messageCount": 3,
+      "keywords": [
+        "First",
+        "Lighthouse",
+        "Playlist",
+        "spreadsheet",
+        "came"
+      ],
+      "topMembers": [
+        "Ana",
+        "Bogdan",
+        "Carmen"
+      ],
+      "summary": "3 messages led by Ana, Bogdan, Carmen."
+    },
+    {
+      "id": "topic_2021_05",
+      "label": "Bring / Calendar / Daria",
+      "start": "2021-05-01",
+      "end": "2021-05-31",
+      "messageCount": 2,
+      "keywords": [
+        "Bring",
+        "Calendar",
+        "Daria",
+        "discipline",
+        "invited"
+      ],
+      "topMembers": [
+        "Carmen",
+        "Daria"
+      ],
+      "summary": "2 messages led by Carmen, Daria."
+    },
+    {
+      "id": "topic_2021_07",
+      "label": "Map / Of / Becomes",
+      "start": "2021-07-01",
+      "end": "2021-07-31",
+      "messageCount": 2,
+      "keywords": [
+        "Map",
+        "Of",
+        "Becomes",
+        "before",
+        "chat"
+      ],
+      "topMembers": [
+        "Ana",
+        "Florin"
+      ],
+      "summary": "2 messages led by Ana, Florin."
+    },
+    {
+      "id": "topic_2021_08",
+      "label": "Compass / Sandwich / Argue",
+      "start": "2021-08-01",
+      "end": "2021-08-31",
+      "messageCount": 3,
+      "keywords": [
+        "Compass",
+        "Sandwich",
+        "Argue",
+        "buses",
+        "got"
+      ],
+      "topMembers": [
+        "Bogdan",
+        "Carmen",
+        "Daria"
+      ],
+      "summary": "3 messages led by Bogdan, Carmen, Daria."
+    },
+    {
+      "id": "topic_2022_01",
+      "label": "First / Found / Lighthouse",
+      "start": "2022-01-01",
+      "end": "2022-01-31",
+      "messageCount": 2,
+      "keywords": [
+        "First",
+        "Found",
+        "Lighthouse",
+        "mihai",
+        "note"
+      ],
+      "topMembers": [
+        "Florin",
+        "Mihai"
+      ],
+      "summary": "2 messages led by Florin, Mihai."
+    },
+    {
+      "id": "topic_2022_04",
+      "label": "Eras / First / People",
+      "start": "2022-04-01",
+      "end": "2022-04-30",
+      "messageCount": 2,
+      "keywords": [
+        "Eras",
+        "First",
+        "People",
+        "archive",
+        "both"
+      ],
+      "topMembers": [
+        "Ana",
+        "Florin"
+      ],
+      "summary": "2 messages led by Ana, Florin."
+    },
+    {
+      "id": "topic_2022_09",
+      "label": "Become / Compass / Decision",
+      "start": "2022-09-01",
+      "end": "2022-09-30",
+      "messageCount": 1,
+      "keywords": [
+        "Become",
+        "Compass",
+        "Decision",
+        "framework",
+        "sandwich"
+      ],
+      "topMembers": [
+        "Daria"
+      ],
+      "summary": "1 messages led by Daria."
+    },
+    {
+      "id": "topic_2023_02",
+      "label": "Index / Sarmale / Absurdly",
+      "start": "2023-02-01",
+      "end": "2023-02-28",
+      "messageCount": 2,
+      "keywords": [
+        "Index",
+        "Sarmale",
+        "Absurdly",
+        "accurate",
+        "ambition"
+      ],
+      "topMembers": [
+        "Bogdan",
+        "Carmen"
+      ],
+      "summary": "2 messages led by Bogdan, Carmen."
+    },
+    {
+      "id": "topic_2023_03",
+      "label": "According / Index / Is",
+      "start": "2023-03-01",
+      "end": "2023-03-31",
+      "messageCount": 1,
+      "keywords": [
+        "According",
+        "Index",
+        "Is",
+        "sarmale",
+        "serious"
+      ],
+      "topMembers": [
+        "Mihai"
+      ],
+      "summary": "1 messages led by Mihai."
+    },
+    {
+      "id": "topic_2023_11",
+      "label": "Era / Jokes / Lighthouse",
+      "start": "2023-11-01",
+      "end": "2023-11-30",
+      "messageCount": 1,
+      "keywords": [
+        "Era",
+        "Jokes",
+        "Lighthouse",
+        "of",
+        "spreadsheet"
+      ],
+      "topMembers": [
+        "Ana"
+      ],
+      "summary": "1 messages led by Ana."
+    },
+    {
+      "id": "topic_2024_02",
+      "label": "Edges / Graph / Introduced",
+      "start": "2024-02-01",
+      "end": "2024-02-29",
+      "messageCount": 1,
+      "keywords": [
+        "Edges",
+        "Graph",
+        "Introduced",
+        "memory",
+        "should"
+      ],
+      "topMembers": [
+        "Florin"
+      ],
+      "summary": "1 messages led by Florin."
+    },
+    {
+      "id": "topic_2024_04",
+      "label": "Archive / Go / Keep",
+      "start": "2024-04-01",
+      "end": "2024-04-30",
+      "messageCount": 1,
+      "keywords": [
+        "Archive",
+        "Go",
+        "Keep",
+        "might",
+        "quiet"
+      ],
+      "topMembers": [
+        "Carmen"
+      ],
+      "summary": "1 messages led by Carmen."
+    },
+    {
+      "id": "topic_2024_05",
+      "label": "Lighthouse / Noted / Remains",
+      "start": "2024-05-01",
+      "end": "2024-05-31",
+      "messageCount": 1,
+      "keywords": [
+        "Lighthouse",
+        "Noted",
+        "Remains",
+        "spreadsheet",
+        "warm"
+      ],
+      "topMembers": [
+        "Bogdan"
+      ],
+      "summary": "1 messages led by Bogdan."
+    },
+    {
+      "id": "topic_2024_11",
+      "label": "Choose / Compass / Earlier",
+      "start": "2024-11-01",
+      "end": "2024-11-30",
+      "messageCount": 1,
+      "keywords": [
+        "Choose",
+        "Compass",
+        "Earlier",
+        "sandwich",
+        "says"
+      ],
+      "topMembers": [
+        "Daria"
+      ],
+      "summary": "1 messages led by Daria."
+    },
+    {
+      "id": "topic_2025_01",
+      "label": "Debates / Index / Miss",
+      "start": "2025-01-01",
+      "end": "2025-01-31",
+      "messageCount": 1,
+      "keywords": [
+        "Debates",
+        "Index",
+        "Miss",
+        "sarmale"
+      ],
+      "topMembers": [
+        "Mihai"
+      ],
+      "summary": "1 messages led by Mihai."
+    },
+    {
+      "id": "topic_2025_06",
+      "label": "Link / Map / Another",
+      "start": "2025-06-01",
+      "end": "2025-06-30",
+      "messageCount": 2,
+      "keywords": [
+        "Link",
+        "Map",
+        "Another",
+        "archive",
+        "is"
+      ],
+      "topMembers": [
+        "Ana",
+        "Florin"
+      ],
+      "summary": "2 messages led by Ana, Florin."
+    }
+  ],
+  "introductions": [
+    {
+      "from": "Ana",
+      "to": "Bogdan",
+      "firstMentionAt": "2021-01-03T07:04:00Z",
+      "messageId": "m_000002",
+      "snippet": "I invited Bogdan because he remembers every train platform."
+    },
+    {
+      "from": "Ana",
+      "to": "Carmen",
+      "firstMentionAt": "2021-02-11T18:15:00Z",
+      "messageId": "m_000004",
+      "snippet": "Carmen would know where the first shared playlist came from."
+    },
+    {
+      "from": "Carmen",
+      "to": "Daria",
+      "firstMentionAt": "2021-05-02T07:30:00Z",
+      "messageId": "m_000007",
+      "snippet": "I invited Daria for the picnic logistics."
+    },
+    {
+      "from": "Ana",
+      "to": "Florin",
+      "firstMentionAt": "2021-07-19T15:22:00Z",
+      "messageId": "m_000009",
+      "snippet": "Florin should see this map idea before it becomes folklore."
+    },
+    {
+      "from": "Florin",
+      "to": "Mihai",
+      "firstMentionAt": "2022-01-14T10:18:00Z",
+      "messageId": "m_000014",
+      "snippet": "Mihai has the screenshots from the first planning weekend."
+    }
+  ],
+  "insideJokes": [
+    {
+      "phrase": "lighthouse spreadsheet",
+      "originAt": "2021-02-11T18:20:00Z",
+      "originSender": "Carmen",
+      "originId": "m_000005",
+      "occurrences": 5,
+      "participants": [
+        "Ana",
+        "Bogdan",
+        "Carmen",
+        "Mihai"
+      ],
+      "snippet": "The first playlist was definitely the lighthouse spreadsheet era."
+    },
+    {
+      "phrase": "sandwich compass",
+      "originAt": "2021-08-03T18:00:00Z",
+      "originSender": "Daria",
+      "originId": "m_000011",
+      "occurrences": 5,
+      "participants": [
+        "Bogdan",
+        "Carmen",
+        "Daria"
+      ],
+      "snippet": "The sandwich compass points north again."
+    },
+    {
+      "phrase": "the sandwich",
+      "originAt": "2021-08-03T18:00:00Z",
+      "originSender": "Daria",
+      "originId": "m_000011",
+      "occurrences": 4,
+      "participants": [
+        "Bogdan",
+        "Carmen",
+        "Daria"
+      ],
+      "snippet": "The sandwich compass points north again."
+    },
+    {
+      "phrase": "the sandwich compass",
+      "originAt": "2021-08-03T18:00:00Z",
+      "originSender": "Daria",
+      "originId": "m_000011",
+      "occurrences": 4,
+      "participants": [
+        "Bogdan",
+        "Carmen",
+        "Daria"
+      ],
+      "snippet": "The sandwich compass points north again."
+    },
+    {
+      "phrase": "sarmale index",
+      "originAt": "2023-02-01T06:32:00Z",
+      "originSender": "Bogdan",
+      "originId": "m_000019",
+      "occurrences": 4,
+      "participants": [
+        "Bogdan",
+        "Carmen",
+        "Mihai"
+      ],
+      "snippet": "I propose the sarmale index for measuring gathering ambition."
+    },
+    {
+      "phrase": "the sarmale",
+      "originAt": "2023-02-01T06:32:00Z",
+      "originSender": "Bogdan",
+      "originId": "m_000019",
+      "occurrences": 4,
+      "participants": [
+        "Bogdan",
+        "Carmen",
+        "Mihai"
+      ],
+      "snippet": "I propose the sarmale index for measuring gathering ambition."
+    },
+    {
+      "phrase": "the sarmale index",
+      "originAt": "2023-02-01T06:32:00Z",
+      "originSender": "Bogdan",
+      "originId": "m_000019",
+      "occurrences": 4,
+      "participants": [
+        "Bogdan",
+        "Carmen",
+        "Mihai"
+      ],
+      "snippet": "I propose the sarmale index for measuring gathering ambition."
+    },
+    {
+      "phrase": "the first",
+      "originAt": "2021-02-11T18:15:00Z",
+      "originSender": "Ana",
+      "originId": "m_000004",
+      "occurrences": 3,
+      "participants": [
+        "Ana",
+        "Carmen",
+        "Florin"
+      ],
+      "snippet": "Carmen would know where the first shared playlist came from."
+    }
+  ],
+  "departures": [
+    {
+      "member": "Carmen",
+      "status": "departed",
+      "lastMessageAt": "2024-04-12T15:00:00Z",
+      "daysSinceActive": 418,
+      "activeSpanDays": 1155,
+      "lastSnippet": "I might go quiet for a while, but keep the archive warm.",
+      "interpretation": "No recent activity in the observed archive window."
+    },
+    {
+      "member": "Bogdan",
+      "status": "departed",
+      "lastMessageAt": "2024-05-05T15:00:00Z",
+      "daysSinceActive": 395,
+      "activeSpanDays": 1218,
+      "lastSnippet": "Noted. The lighthouse spreadsheet remains warm.",
+      "interpretation": "No recent activity in the observed archive window."
+    },
+    {
+      "member": "Daria",
+      "status": "departed",
+      "lastMessageAt": "2024-11-30T18:10:00Z",
+      "daysSinceActive": 186,
+      "activeSpanDays": 1308,
+      "lastSnippet": "Sandwich compass says we choose the earlier train.",
+      "interpretation": "No recent activity in the observed archive window."
+    },
+    {
+      "member": "Mihai",
+      "status": "quiet",
+      "lastMessageAt": "2025-01-15T08:00:00Z",
+      "daysSinceActive": 141,
+      "activeSpanDays": 1096,
+      "lastSnippet": "I miss the sarmale index debates.",
+      "interpretation": "Activity faded before the archive ended."
+    },
+    {
+      "member": "Ana",
+      "status": "active",
+      "lastMessageAt": "2025-06-05T13:40:00Z",
+      "daysSinceActive": 0,
+      "activeSpanDays": 1614,
+      "lastSnippet": "The archive map is ready for another pass.",
+      "interpretation": "Still active near the end of the archive."
+    },
+    {
+      "member": "Florin",
+      "status": "active",
+      "lastMessageAt": "2025-06-05T13:45:00Z",
+      "daysSinceActive": 0,
+      "activeSpanDays": 1416,
+      "lastSnippet": "Ship the map with a repository link and a support link.",
+      "interpretation": "Still active near the end of the archive."
+    }
+  ],
+  "notableMessages": [
+    {
+      "id": "m_000001",
+      "at": "2021-01-03T07:00:00Z",
+      "sender": "Ana",
+      "kind": "first-message",
+      "snippet": "I made a tiny archive map for old weekend plans.",
+      "why": "First message by this member in the archive."
+    },
+    {
+      "id": "m_000003",
+      "at": "2021-01-03T07:12:00Z",
+      "sender": "Bogdan",
+      "kind": "first-message",
+      "snippet": "Hello, I accept this responsibility with an unreasonable spreadsheet.",
+      "why": "First message by this member in the archive."
+    },
+    {
+      "id": "m_000005",
+      "at": "2021-02-11T18:20:00Z",
+      "sender": "Carmen",
+      "kind": "first-message",
+      "snippet": "The first playlist was definitely the lighthouse spreadsheet era.",
+      "why": "First message by this member in the archive."
+    },
+    {
+      "id": "m_000008",
+      "at": "2021-05-02T07:35:00Z",
+      "sender": "Daria",
+      "kind": "first-message",
+      "snippet": "I bring calendar discipline and snacks.",
+      "why": "First message by this member in the archive."
+    },
+    {
+      "id": "m_000010",
+      "at": "2021-07-19T15:25:00Z",
+      "sender": "Florin",
+      "kind": "first-message",
+      "snippet": "A map of the chat is exactly my kind of strange useful thing.",
+      "why": "First message by this member in the archive."
+    },
+    {
+      "id": "m_000015",
+      "at": "2022-01-14T10:24:00Z",
+      "sender": "Mihai",
+      "kind": "first-message",
+      "snippet": "I found them, plus the original lighthouse spreadsheet note.",
+      "why": "First message by this member in the archive."
+    },
+    {
+      "id": "m_000003",
+      "at": "2021-01-03T07:12:00Z",
+      "sender": "Bogdan",
+      "kind": "longest-message",
+      "snippet": "Hello, I accept this responsibility with an unreasonable spreadsheet.",
+      "why": "Longest message in the archive."
+    }
+  ],
+  "graph": {
+    "dotPath": "data/v1/who-introduced-whom.dot",
+    "svgPath": "data/v1/who-introduced-whom.svg",
+    "rendered": true,
+    "renderer": "graphviz-dot"
+  }
+}

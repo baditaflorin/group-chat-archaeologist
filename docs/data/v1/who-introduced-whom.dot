@@ -1,0 +1,16 @@
+digraph introductions {
+  graph [rankdir=LR, bgcolor="transparent", pad="0.35"];
+  node [shape=box, style="rounded,filled", fillcolor="#f4f0e6", color="#2f5f53", fontname="Inter", fontsize=12];
+  edge [color="#8a5a44", fontname="Inter", fontsize=10, arrowsize=0.7];
+  "Ana";
+  "Bogdan";
+  "Carmen";
+  "Daria";
+  "Florin";
+  "Mihai";
+  "Ana" -> "Bogdan" [label="2021-01-03"];
+  "Ana" -> "Carmen" [label="2021-02-11"];
+  "Carmen" -> "Daria" [label="2021-05-02"];
+  "Ana" -> "Florin" [label="2021-07-19"];
+  "Florin" -> "Mihai" [label="2022-01-14"];
+}
