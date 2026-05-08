@@ -14,7 +14,6 @@ import { assetUrl } from './features/chat/api';
 import { daysAgo, formatDate, formatMonth } from './features/chat/format';
 import type { Dashboard, Departure, InsideJoke, Introduction, TopicPeriod } from './features/chat/schema';
 import { useDashboard, useMeta } from './features/chat/useDashboard';
-import { usePublishedCommit } from './features/chat/usePublishedCommit';
 
 type View = 'timeline' | 'map' | 'jokes' | 'departures';
 
@@ -28,7 +27,6 @@ const views: Array<{ id: View; label: string; icon: typeof CalendarClock }> = [
 export function App() {
   const dashboard = useDashboard();
   const meta = useMeta();
-  const publishedCommit = usePublishedCommit();
   const [view, setView] = useState<View>(() => (localStorage.getItem('active-view') as View) || 'timeline');
   const [search, setSearch] = useState('');
   const [members, setMembers] = useState<string[]>([]);
@@ -146,7 +144,7 @@ export function App() {
           </div>
         </section>
       </section>
-      <Footer data={data} commit={publishedCommit.data ?? data.source.sourceCommit} />
+      <Footer data={data} />
     </main>
   );
 }
@@ -382,13 +380,12 @@ function Departures({ departures }: { departures: Departure[] }) {
   );
 }
 
-function Footer({ data, commit }: { data: Dashboard; commit: string }) {
+function Footer({ data }: { data: Dashboard }) {
   return (
     <footer className="border-t border-ink/10 bg-[#fbfaf6] px-4 py-5">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 text-sm text-ink/60 md:flex-row md:items-center md:justify-between">
         <div>
-          Version <span className="font-mono text-ink">v{__APP_VERSION__}</span> · Published commit{' '}
-          <span className="font-mono text-ink">{commit}</span> · Data commit{' '}
+          Version <span className="font-mono text-ink">v{__APP_VERSION__}</span> · Commit{' '}
           <span className="font-mono text-ink">{data.source.sourceCommit}</span>
         </div>
         <div className="flex flex-wrap gap-3">
