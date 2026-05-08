@@ -59,14 +59,16 @@ func tika(ctx context.Context, baseURL string, data []byte) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("call Tika: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() {
+		_ = resp.Body.Close()
+	}()
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return "", fmt.Errorf("read Tika response: %w", err)
 	}
 	if resp.StatusCode >= http.StatusBadRequest {
-		return "", fmt.Errorf("Tika returned %s: %s", resp.Status, strings.TrimSpace(string(body)))
+		return "", fmt.Errorf("tika returned %s: %s", resp.Status, strings.TrimSpace(string(body)))
 	}
 
 	return string(body), nil

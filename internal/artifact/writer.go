@@ -26,7 +26,7 @@ func Write(ctx context.Context, outputDir string, dashboard domain.Dashboard) er
 	if err := os.RemoveAll(tmpDir); err != nil {
 		return fmt.Errorf("remove tmp dir: %w", err)
 	}
-	if err := os.MkdirAll(tmpDir, 0o755); err != nil {
+	if err := os.MkdirAll(tmpDir, 0o750); err != nil {
 		return fmt.Errorf("create tmp dir: %w", err)
 	}
 
@@ -52,7 +52,7 @@ func Write(ctx context.Context, outputDir string, dashboard domain.Dashboard) er
 		return err
 	}
 
-	if err := os.MkdirAll(filepath.Dir(outputDir), 0o755); err != nil {
+	if err := os.MkdirAll(filepath.Dir(outputDir), 0o750); err != nil {
 		return fmt.Errorf("create output parent: %w", err)
 	}
 	if err := os.RemoveAll(outputDir); err != nil {

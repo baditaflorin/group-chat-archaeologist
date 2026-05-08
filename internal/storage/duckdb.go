@@ -51,7 +51,9 @@ func (s *Store) duckDBSummary(ctx context.Context, messages []domain.Message) (d
 	if err != nil {
 		return domain.StorageSummary{}, fmt.Errorf("create duckdb temp dir: %w", err)
 	}
-	defer os.RemoveAll(tmpDir)
+	defer func() {
+		_ = os.RemoveAll(tmpDir)
+	}()
 
 	csvPath := filepath.Join(tmpDir, "messages.csv")
 	if err := writeMessagesCSV(csvPath, messages); err != nil {
@@ -111,7 +113,9 @@ func writeMessagesCSV(path string, messages []domain.Message) error {
 	if err != nil {
 		return fmt.Errorf("create messages csv: %w", err)
 	}
-	defer file.Close()
+	defer func() {
+		_ = file.Close()
+	}()
 
 	writer := csv.NewWriter(file)
 	if err := writer.Write([]string{"id", "ts", "sender", "body"}); err != nil {

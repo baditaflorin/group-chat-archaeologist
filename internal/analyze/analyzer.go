@@ -385,9 +385,16 @@ func titleFromKeywords(keywords []string) string {
 		words = words[:3]
 	}
 	for i := range words {
-		words[i] = strings.Title(words[i])
+		words[i] = capitalize(words[i])
 	}
 	return strings.Join(words, " / ")
+}
+
+func capitalize(value string) string {
+	if value == "" {
+		return value
+	}
+	return strings.ToUpper(value[:1]) + value[1:]
 }
 
 func topKeys(counts map[string]int, limit int) []string {

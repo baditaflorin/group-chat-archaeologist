@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+COMMIT_MSG_FILE="${1:?commit message file required}" make hooks-commit-msg

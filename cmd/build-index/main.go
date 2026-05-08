@@ -32,7 +32,9 @@ func main() {
 
 	store, err := storage.Open()
 	utils.HandleErrorOrLogWithMessages(err, "failed to open DuckDB store", "")
-	defer store.Close()
+	defer func() {
+		_ = store.Close()
+	}()
 
 	summary, err := store.Summarize(ctx, messages)
 	utils.HandleErrorOrLogWithMessages(err, "failed to summarize messages with DuckDB", "")

@@ -8,9 +8,10 @@
     "build": "tsc --noEmit && vite build && cp ../docs/index.html ../docs/404.html",
     "preview": "vite preview --host 127.0.0.1",
     "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
     "fmt": "prettier --write .",
     "fmt:check": "prettier --check .",
-    "test": "vitest run",
+    "test": "vitest run src",
     "test:e2e": "playwright test"
   },
   "dependencies": {
