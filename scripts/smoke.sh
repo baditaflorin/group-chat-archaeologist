@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-port="${PORT:-4175}"
+port="${PORT:-$(python3 - <<'PY'
+import socket
+
+with socket.socket() as sock:
+    sock.bind(("127.0.0.1", 0))
+    print(sock.getsockname()[1])
+PY
+)}"
 tmp_dir="$(mktemp -d)"
 log_file="$(mktemp)"
 server_pid=""
