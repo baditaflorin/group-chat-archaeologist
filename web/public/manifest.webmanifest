@@ -1,0 +1,10 @@
+{
+  "name": "Group Chat Archaeologist",
+  "short_name": "Chat Archaeologist",
+  "start_url": "/group-chat-archaeologist/",
+  "scope": "/group-chat-archaeologist/",
+  "display": "standalone",
+  "background_color": "#f7f5ef",
+  "theme_color": "#16251f",
+  "icons": []
+}
