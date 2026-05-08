@@ -1,5 +1,4 @@
 import react from '@vitejs/plugin-react';
-import { execSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -8,16 +7,6 @@ import packageJson from './package.json' with { type: 'json' };
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const base = '/group-chat-archaeologist/';
-
-function commitSha() {
-  try {
-    return execSync('git rev-parse --short HEAD', { stdio: ['ignore', 'pipe', 'ignore'] })
-      .toString()
-      .trim();
-  } catch {
-    return 'unknown';
-  }
-}
 
 function docsDataServer(): Plugin {
   return {
@@ -56,8 +45,7 @@ export default defineConfig({
   plugins: [react(), docsDataServer()],
   publicDir: 'public',
   define: {
-    __APP_VERSION__: JSON.stringify(packageJson.version),
-    __COMMIT_SHA__: JSON.stringify(commitSha())
+    __APP_VERSION__: JSON.stringify(packageJson.version)
   },
   build: {
     outDir: '../docs',
