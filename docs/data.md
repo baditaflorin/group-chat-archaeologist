@@ -28,3 +28,17 @@ Breaking changes must move to `/data/v2/`.
 ## Regeneration
 
 Run `make data INPUT_PATH=/path/to/export.txt`. The generator writes artifacts deterministically and records the source checksum.
+
+Useful flags:
+
+- `--input_path`
+- `--output_dir`
+- `--start`
+- `--end`
+- `--concurrency`
+- `--saveEvery`
+- `--tika_url`
+- `--ollama_url`
+- `--ollama_model`
+
+DuckDB CLI is the preferred analytics engine. If it is unavailable, the generator records a deterministic Go fallback in `source.analyticsEngine`.
