@@ -1,0 +1,8 @@
+{
+  "adapter": "slack_json",
+  "minMessages": 2,
+  "members": ["U01", "U02"],
+  "maxFatalErrors": 0,
+  "requiresWarningCodes": ["slack_subtype", "unresolved_slack_mention"],
+  "forbiddenSnippetInMessageText": []
+}

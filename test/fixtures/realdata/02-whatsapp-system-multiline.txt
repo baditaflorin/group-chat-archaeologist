@@ -1,0 +1,5 @@
+3/4/24, 8:00 AM - Alice: I invited Bob to the group.
+3/4/24, 8:01 AM - Messages and calls are end-to-end encrypted. No one outside this chat can read or listen to them.
+3/4/24, 8:02 AM - Bob: Hello!
+This line is part of the same thought.
+3/4/24, 8:03 AM - Carla: <Media omitted>

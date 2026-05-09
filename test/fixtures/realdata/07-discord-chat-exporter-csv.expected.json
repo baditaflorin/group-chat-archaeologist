@@ -1,0 +1,8 @@
+{
+  "adapter": "discord_csv",
+  "minMessages": 2,
+  "members": ["Ana", "Bogdan"],
+  "maxFatalErrors": 0,
+  "requiresWarningCodes": ["csv_multiline_field"],
+  "forbiddenSnippetInMessageText": []
+}

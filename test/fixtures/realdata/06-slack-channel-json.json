@@ -1,0 +1,5 @@
+[
+  {"type":"message","user":"U01","text":"I invited <@U02> to #general","ts":"1712140800.000100"},
+  {"type":"message","subtype":"channel_join","user":"U02","text":"<@U02> has joined the channel","ts":"1712140860.000200"},
+  {"type":"message","user":"U02","text":"Thanks, reading the old thread now","ts":"1712140920.000300"}
+]

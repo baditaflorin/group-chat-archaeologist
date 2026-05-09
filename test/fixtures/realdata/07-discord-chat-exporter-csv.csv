@@ -1,0 +1,4 @@
+Date,AuthorID,Author,Content,Attachments,Reactions
+2024-05-01 10:00:00,1,Ana,"I invited Bogdan, see https://example.com",,
+2024-05-01 10:01:00,2,Bogdan,"Hello, CSV has commas, quotes, and
+new lines",,thumbsup:1

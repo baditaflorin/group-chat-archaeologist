@@ -1,0 +1,8 @@
+{
+  "adapter": "whatsapp_text",
+  "minMessages": 3,
+  "members": ["Alice", "Bob", "Carla"],
+  "maxFatalErrors": 0,
+  "requiresWarningCodes": ["system_message", "media_placeholder"],
+  "forbiddenSnippetInMessageText": ["end-to-end encrypted"]
+}

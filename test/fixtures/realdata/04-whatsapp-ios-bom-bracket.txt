@@ -1,0 +1,2 @@
+﻿[16/02/2025, 21:05:14] Ana: iOS export line one
+[16/02/2025, 21:06:00] Bogdan: iOS export line two

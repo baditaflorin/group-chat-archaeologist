@@ -1,0 +1,8 @@
+{
+  "adapter": "telegram_json",
+  "minMessages": 2,
+  "members": ["Ana", "Bogdan"],
+  "maxFatalErrors": 0,
+  "requiresWarningCodes": ["service_message"],
+  "forbiddenSnippetInMessageText": []
+}

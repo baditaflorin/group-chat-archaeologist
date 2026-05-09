@@ -1,0 +1,8 @@
+{
+  "adapter": "telegram_html",
+  "minMessages": 1,
+  "members": ["Ana"],
+  "maxFatalErrors": 0,
+  "requiresWarningCodes": [],
+  "forbiddenSnippetInMessageText": []
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Weekend Crew",
+  "type": "private_group",
+  "messages": [
+    {"id": 1, "type": "service", "date": "2024-01-01T09:00:00", "actor": "Ana", "action": "create_group"},
+    {"id": 2, "type": "message", "date": "2024-01-01T09:05:00", "from": "Ana", "text": "I added Bogdan for the train plan."},
+    {"id": 3, "type": "message", "date": "2024-01-01T09:06:00", "from": "Bogdan", "text": [{"type":"plain","text":"I am here "},{"type":"hashtag","text":"#train"}]}
+  ]
+}

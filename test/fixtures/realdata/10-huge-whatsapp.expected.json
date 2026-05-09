@@ -1,0 +1,8 @@
+{
+  "adapter": "whatsapp_text",
+  "minMessages": 20000,
+  "members": ["Alice", "Bob", "Carla", "Daria"],
+  "maxFatalErrors": 0,
+  "requiresWarningCodes": ["large_input"],
+  "forbiddenSnippetInMessageText": []
+}

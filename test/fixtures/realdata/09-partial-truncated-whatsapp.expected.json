@@ -1,0 +1,8 @@
+{
+  "adapter": "whatsapp_text",
+  "minMessages": 2,
+  "members": ["Alice", "Carla"],
+  "maxFatalErrors": 0,
+  "requiresWarningCodes": ["malformed_timestamp_line"],
+  "forbiddenSnippetInMessageText": ["10:01 AM - Bob"]
+}
