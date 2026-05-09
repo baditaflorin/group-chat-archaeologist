@@ -51,7 +51,7 @@ go test ./internal/chatparse -run '^$' -bench BenchmarkRealDataFixtures -benchti
 
 Measured on Apple M1 Pro:
 
-- Median small-fixture parse: about 28 microseconds.
+- Median small-fixture parse: about 35 microseconds.
 - p95 fixture parse: 221 milliseconds, driven by the 20,000-message fixture.
 - Worst fixture: `10-huge-whatsapp`, 221 milliseconds.
 - 20,000-message budget: pass, comfortably below 2 seconds.
