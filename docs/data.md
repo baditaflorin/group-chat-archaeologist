@@ -22,6 +22,12 @@ The v1 schema contains:
 - `insideJokes`
 - `departures`
 - `notableMessages`
+- `warnings`
+- `debug`
+
+Inference objects for topics, introductions, inside jokes, and departures include `confidence.score`, `confidence.level`, and `confidence.evidence`.
+
+`source` includes the detected adapter, adapter confidence, normalization steps, warning count, app version, source commit, and generator parameters.
 
 Breaking changes must move to `/data/v2/`.
 
@@ -37,6 +43,8 @@ Useful flags:
 - `--end`
 - `--concurrency`
 - `--saveEvery`
+- `--generated_at`
+- `--timeout_seconds`
 - `--tika_url`
 - `--ollama_url`
 - `--ollama_model`

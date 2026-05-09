@@ -1,9 +1,11 @@
 {
-  "generatedAt": "2026-05-08T08:42:38Z",
+  "generatedAt": "2026-05-09T10:20:19Z",
   "schemaVersion": "v1",
-  "sourceCommit": "f161916",
+  "sourceCommit": "6d04ae0",
   "inputSha256": "0e6603b28c83aadb7f333629a2dd76ebe30fcd4caee2826c4cf692ccad838f7c",
   "messageCount": 29,
+  "warningCount": 0,
+  "appVersion": "0.2.0",
   "graphRendered": true,
   "artifactVersion": "1"
 }

@@ -17,6 +17,8 @@ type Meta struct {
 	SourceCommit    string `json:"sourceCommit"`
 	InputSHA256     string `json:"inputSha256"`
 	MessageCount    int    `json:"messageCount"`
+	WarningCount    int    `json:"warningCount"`
+	AppVersion      string `json:"appVersion"`
 	GraphRendered   bool   `json:"graphRendered"`
 	ArtifactVersion string `json:"artifactVersion"`
 }
@@ -45,6 +47,8 @@ func Write(ctx context.Context, outputDir string, dashboard domain.Dashboard) er
 		SourceCommit:    dashboard.Source.SourceCommit,
 		InputSHA256:     dashboard.Source.InputSHA256,
 		MessageCount:    dashboard.Source.MessageCount,
+		WarningCount:    dashboard.Source.WarningCount,
+		AppVersion:      dashboard.Source.AppVersion,
 		GraphRendered:   dashboard.Graph.Rendered,
 		ArtifactVersion: "1",
 	}

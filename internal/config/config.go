@@ -15,10 +15,12 @@ type Config struct {
 	TikaURL     string
 	OllamaURL   string
 	OllamaModel string
+	GeneratedAt string
 	Start       time.Time
 	End         time.Time
 	Concurrency int
 	SaveEvery   int
+	Timeout     time.Duration
 }
 
 func Load(args []string) (Config, error) {
@@ -29,6 +31,7 @@ func Load(args []string) (Config, error) {
 	viper.SetDefault("OLLAMA_MODEL", "llama3.2")
 	viper.SetDefault("CONCURRENCY", 4)
 	viper.SetDefault("SAVE_EVERY", 5000)
+	viper.SetDefault("TIMEOUT_SECONDS", 90)
 
 	cfg := Config{}
 	fs := flag.NewFlagSet("build-index", flag.ContinueOnError)
@@ -37,9 +40,11 @@ func Load(args []string) (Config, error) {
 	fs.StringVar(&cfg.TikaURL, "tika_url", viper.GetString("TIKA_SERVER_URL"), "Apache Tika server URL")
 	fs.StringVar(&cfg.OllamaURL, "ollama_url", viper.GetString("OLLAMA_URL"), "Ollama-compatible local LLM URL")
 	fs.StringVar(&cfg.OllamaModel, "ollama_model", viper.GetString("OLLAMA_MODEL"), "local LLM model")
+	fs.StringVar(&cfg.GeneratedAt, "generated_at", viper.GetString("GENERATED_AT"), "artifact generation timestamp (RFC3339)")
 	fs.IntVar(&cfg.Concurrency, "concurrency", viper.GetInt("CONCURRENCY"), "batch concurrency")
 	fs.IntVar(&cfg.SaveEvery, "saveEvery", viper.GetInt("SAVE_EVERY"), "checkpoint interval")
 	fs.IntVar(&cfg.SaveEvery, "save_every", viper.GetInt("SAVE_EVERY"), "checkpoint interval")
+	timeoutSeconds := fs.Int("timeout_seconds", viper.GetInt("TIMEOUT_SECONDS"), "build timeout in seconds")
 
 	start := fs.String("start", viper.GetString("START"), "inclusive start date YYYY-MM-DD")
 	end := fs.String("end", viper.GetString("END"), "inclusive end date YYYY-MM-DD")
@@ -59,6 +64,15 @@ func Load(args []string) (Config, error) {
 	}
 	if cfg.SaveEvery < 1 {
 		return Config{}, fmt.Errorf("saveEvery must be >= 1")
+	}
+	if *timeoutSeconds < 1 {
+		return Config{}, fmt.Errorf("timeout_seconds must be >= 1")
+	}
+	cfg.Timeout = time.Duration(*timeoutSeconds) * time.Second
+	if cfg.GeneratedAt != "" {
+		if _, err := time.Parse(time.RFC3339, cfg.GeneratedAt); err != nil {
+			return Config{}, fmt.Errorf("parse generated_at %q: %w", cfg.GeneratedAt, err)
+		}
 	}
 
 	parsedStart, err := parseBoundary(*start, false)

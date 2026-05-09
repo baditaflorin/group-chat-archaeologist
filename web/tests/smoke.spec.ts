@@ -21,6 +21,6 @@ test('loads the static chat archaeology explorer and map', async ({ page }) => {
   await page.getByRole('button', { name: 'Map' }).click();
   await expect(page.getByRole('heading', { name: 'Who Introduced Whom' })).toBeVisible();
   await expect(page.getByAltText('GraphViz map showing who introduced whom in the group chat')).toBeVisible();
-  await expect(page.getByText(/Version v0\.1\.0/)).toBeVisible();
+  await expect(page.getByText(/Version v0\.2\.0/)).toBeVisible();
   expect(errors).toEqual([]);
 });

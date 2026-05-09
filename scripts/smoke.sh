@@ -1,14 +1,19 @@
-#!/usr/bin/env bash
+#!/bin/bash
 set -euo pipefail
 
-port="${PORT:-$(python3 - <<'PY'
-import socket
-
-with socket.socket() as sock:
-    sock.bind(("127.0.0.1", 0))
-    print(sock.getsockname()[1])
-PY
-)}"
+if [[ -n "${PORT:-}" ]]; then
+  port="$PORT"
+else
+  port="$(node - <<'JS'
+const net = require('node:net');
+const server = net.createServer();
+server.listen(0, '127.0.0.1', () => {
+  console.log(server.address().port);
+  server.close();
+});
+JS
+)"
+fi
 tmp_dir="$(mktemp -d)"
 log_file="$(mktemp)"
 server_pid=""
@@ -21,9 +26,11 @@ cleanup() {
 }
 trap cleanup EXIT
 
-npm --prefix web run build
+if [[ "${SMOKE_SKIP_BUILD:-0}" != "1" ]]; then
+  npm --prefix web run build
+fi
 cp -R "$(pwd)/docs" "$tmp_dir/group-chat-archaeologist"
-python3 -m http.server "$port" --bind 127.0.0.1 --directory "$tmp_dir" >"$log_file" 2>&1 &
+node scripts/static-server.mjs "$tmp_dir" "$port" >"$log_file" 2>&1 &
 server_pid="$!"
 
 for _ in {1..40}; do

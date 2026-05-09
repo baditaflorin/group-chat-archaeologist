@@ -33,7 +33,7 @@ make build
 make pages-preview
 ```
 
-Text, JSON, CSV, TSV, Markdown, and log-like exports are read directly. Binary document formats can be extracted through Apache Tika by setting `TIKA_SERVER_URL` or passing `--tika_url`.
+WhatsApp text, Telegram JSON/HTML, Slack JSON, DiscordChatExporter CSV, generic JSON, TSV, Markdown, and log-like exports are read directly. The generator detects the adapter, normalizes common encoding/date quirks, and writes warnings plus confidence evidence into the artifact. Binary document formats can be extracted through Apache Tika by setting `TIKA_SERVER_URL` or passing `--tika_url`.
 
 Optional local topic-label enrichment uses an Ollama-compatible endpoint:
 
@@ -47,7 +47,7 @@ OLLAMA_URL=http://localhost:11434 OLLAMA_MODEL=llama3.2 make data INPUT_PATH=/pa
 - Who-introduced-whom GraphViz map.
 - Inside-joke origin tracer based on repeated phrases and first sightings.
 - Member-departure analysis based on last activity and archive end date.
-- Static artifact metadata with schema version, input checksum, generation time, analytics engine, version, and commit.
+- Static artifact metadata with schema version, input checksum, generation time, adapter confidence, warnings, analytics engine, version, and commit.
 
 ## Architecture
 

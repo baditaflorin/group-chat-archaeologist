@@ -18,16 +18,27 @@ import (
 const (
 	repositoryURL = "https://github.com/baditaflorin/group-chat-archaeologist"
 	payPalURL     = "https://www.paypal.com/paypalme/florinbadita"
+	appVersion    = "0.2.0"
 )
 
 type Input struct {
-	Messages       []domain.Message
-	StorageSummary domain.StorageSummary
-	InputPath      string
-	ParserName     string
-	ExtractionMode string
-	OllamaURL      string
-	OllamaModel    string
+	Messages           []domain.Message
+	StorageSummary     domain.StorageSummary
+	InputPath          string
+	ParserName         string
+	Adapter            string
+	AdapterConfidence  float64
+	AdapterEvidence    []string
+	ExtractionMode     string
+	NormalizationSteps []string
+	Warnings           []domain.Warning
+	GeneratedAt        string
+	Start              time.Time
+	End                time.Time
+	Concurrency        int
+	SaveEvery          int
+	OllamaURL          string
+	OllamaModel        string
 }
 
 func Build(ctx context.Context, input Input) domain.Dashboard {
@@ -44,43 +55,63 @@ func Build(ctx context.Context, input Input) domain.Dashboard {
 			llmUsed = true
 		}
 	}
+	generatedAt := input.GeneratedAt
+	if generatedAt == "" {
+		generatedAt = time.Now().UTC().Format(time.RFC3339)
+	}
+	warnings := normalizeWarnings(input.Warnings)
 
 	return domain.Dashboard{
 		SchemaVersion:   domain.SchemaVersion,
-		GeneratedAt:     time.Now().UTC().Format(time.RFC3339),
+		GeneratedAt:     generatedAt,
 		RepositoryURL:   repositoryURL,
 		PayPalURL:       payPalURL,
-		Source:          sourceSummary(input, messages, llmUsed),
+		Source:          sourceSummary(input, messages, llmUsed, warnings),
 		Members:         members(input.StorageSummary),
 		Topics:          topics,
 		Introductions:   introductionEdges(messages),
 		InsideJokes:     insideJokes(messages),
 		Departures:      departures(messages),
 		NotableMessages: notableMessages(messages),
+		Warnings:        warnings,
+		Debug: domain.DebugInfo{
+			AdapterEvidence: cloneStrings(input.AdapterEvidence),
+			ParseWarnings:   len(warnings),
+		},
 	}
 }
 
-func sourceSummary(input Input, messages []domain.Message, llmUsed bool) domain.SourceSummary {
+func sourceSummary(input Input, messages []domain.Message, llmUsed bool, warnings []domain.Warning) domain.SourceSummary {
 	var first, last string
 	if len(messages) > 0 {
 		first = messages[0].Timestamp.Format(time.RFC3339)
 		last = messages[len(messages)-1].Timestamp.Format(time.RFC3339)
 	}
+	adapter := input.Adapter
+	if adapter == "" {
+		adapter = input.ParserName
+	}
 
 	return domain.SourceSummary{
-		InputName:       filepath.Base(input.InputPath),
-		InputSHA256:     fileSHA256(input.InputPath),
-		Parser:          input.ParserName,
-		ExtractionMode:  input.ExtractionMode,
-		AnalyticsEngine: input.StorageSummary.Engine,
-		MessageCount:    len(messages),
-		MemberCount:     len(input.StorageSummary.MemberStats),
-		FirstMessageAt:  first,
-		LastMessageAt:   last,
-		LLMProvider:     providerName(input.OllamaURL),
-		LLMModel:        input.OllamaModel,
-		LLMUsed:         llmUsed,
-		SourceCommit:    gitCommit(),
+		InputName:          filepath.Base(input.InputPath),
+		InputSHA256:        fileSHA256(input.InputPath),
+		Parser:             input.ParserName,
+		Adapter:            adapter,
+		AdapterConfidence:  roundConfidence(input.AdapterConfidence),
+		ExtractionMode:     input.ExtractionMode,
+		NormalizationSteps: cloneStrings(input.NormalizationSteps),
+		AnalyticsEngine:    input.StorageSummary.Engine,
+		MessageCount:       len(messages),
+		MemberCount:        len(input.StorageSummary.MemberStats),
+		FirstMessageAt:     first,
+		LastMessageAt:      last,
+		WarningCount:       len(warnings),
+		LLMProvider:        providerName(input.OllamaURL),
+		LLMModel:           input.OllamaModel,
+		LLMUsed:            llmUsed,
+		SourceCommit:       gitCommit(),
+		AppVersion:         appVersion,
+		Parameters:         parameters(input),
 	}
 }
 
@@ -152,6 +183,10 @@ func topicTimeline(messages []domain.Message) []domain.TopicPeriod {
 			Keywords:     keywords,
 			TopMembers:   topMembers,
 			Summary:      fmt.Sprintf("%d messages led by %s.", len(b.msgs), strings.Join(topMembers, ", ")),
+			Confidence: confidence(0.55+minFloat(0.35, float64(len(b.msgs))/40), []string{
+				fmt.Sprintf("month bucket %s contains %d parsed messages", key, len(b.msgs)),
+				fmt.Sprintf("top keywords: %s", strings.Join(keywords, ", ")),
+			}),
 		})
 	}
 	return topics
@@ -187,6 +222,10 @@ func introductionEdges(messages []domain.Message) []domain.IntroductionEdge {
 					FirstMentionAt: msg.Timestamp.Format(time.RFC3339),
 					MessageID:      msg.ID,
 					Snippet:        snippet(msg.Text, 140),
+					Confidence: confidence(0.78, []string{
+						fmt.Sprintf("%s was mentioned before their first message", target),
+						fmt.Sprintf("first %s message was at %s", target, firstSent[target].Format(time.RFC3339)),
+					}),
 				})
 			}
 		}
@@ -243,9 +282,14 @@ func insideJokes(messages []domain.Message) []domain.InsideJoke {
 			Occurrences:  stat.count,
 			Participants: participants,
 			Snippet:      snippet(stat.origin.Text, 160),
+			Confidence: confidence(0.45+minFloat(0.45, float64(stat.count+len(participants))/12), []string{
+				fmt.Sprintf("phrase repeated %d times", stat.count),
+				fmt.Sprintf("used by %d participants", len(participants)),
+			}),
 		})
 	}
 
+	jokes = dedupeInsideJokes(jokes)
 	sort.SliceStable(jokes, func(i, j int) bool {
 		if jokes[i].Occurrences == jokes[j].Occurrences {
 			return jokes[i].OriginAt < jokes[j].OriginAt
@@ -293,6 +337,10 @@ func departures(messages []domain.Message) []domain.Departure {
 			ActiveSpanDays:  span,
 			LastSnippet:     snippet(active.last.Text, 140),
 			Interpretation:  interpretation,
+			Confidence: confidence(departureConfidence(gap, span, active.count), []string{
+				fmt.Sprintf("last message is %d days before archive end", gap),
+				fmt.Sprintf("%d messages across %d active days", active.count, span),
+			}),
 		})
 	}
 	sort.SliceStable(out, func(i, j int) bool {
@@ -368,6 +416,119 @@ func providerName(url string) string {
 	return "ollama"
 }
 
+func parameters(input Input) map[string]string {
+	out := map[string]string{
+		"concurrency": fmt.Sprintf("%d", input.Concurrency),
+		"saveEvery":   fmt.Sprintf("%d", input.SaveEvery),
+	}
+	if !input.Start.IsZero() {
+		out["start"] = input.Start.Format("2006-01-02")
+	}
+	if !input.End.IsZero() {
+		out["end"] = input.End.Format("2006-01-02")
+	}
+	if input.GeneratedAt != "" {
+		out["generatedAt"] = input.GeneratedAt
+	}
+	return out
+}
+
+func normalizeWarnings(warnings []domain.Warning) []domain.Warning {
+	out := append([]domain.Warning{}, warnings...)
+	sort.SliceStable(out, func(i, j int) bool {
+		if out[i].Line == out[j].Line {
+			if out[i].Code == out[j].Code {
+				return out[i].Evidence < out[j].Evidence
+			}
+			return out[i].Code < out[j].Code
+		}
+		return out[i].Line < out[j].Line
+	})
+	return out
+}
+
+func cloneStrings(values []string) []string {
+	return append([]string{}, values...)
+}
+
+func confidence(score float64, evidence []string) domain.Confidence {
+	score = roundConfidence(score)
+	level := "low"
+	switch {
+	case score >= 0.8:
+		level = "high"
+	case score >= 0.6:
+		level = "medium"
+	}
+	clean := make([]string, 0, len(evidence))
+	for _, item := range evidence {
+		item = strings.TrimSpace(item)
+		if item != "" {
+			clean = append(clean, item)
+		}
+	}
+	return domain.Confidence{Score: score, Level: level, Evidence: clean}
+}
+
+func roundConfidence(score float64) float64 {
+	if score < 0 {
+		score = 0
+	}
+	if score > 1 {
+		score = 1
+	}
+	return float64(int(score*100+0.5)) / 100
+}
+
+func minFloat(a, b float64) float64 {
+	if a < b {
+		return a
+	}
+	return b
+}
+
+func departureConfidence(gap, span, count int) float64 {
+	score := 0.52
+	if count > 2 {
+		score += 0.12
+	}
+	if span > 7 {
+		score += 0.12
+	}
+	if gap > 60 {
+		score += 0.14
+	}
+	if gap > 180 {
+		score += 0.08
+	}
+	return score
+}
+
+func dedupeInsideJokes(jokes []domain.InsideJoke) []domain.InsideJoke {
+	sort.SliceStable(jokes, func(i, j int) bool {
+		if jokes[i].Occurrences == jokes[j].Occurrences {
+			return len(jokes[i].Phrase) > len(jokes[j].Phrase)
+		}
+		return jokes[i].Occurrences > jokes[j].Occurrences
+	})
+	kept := []domain.InsideJoke{}
+	for _, joke := range jokes {
+		duplicate := false
+		for _, existing := range kept {
+			if strings.Contains(existing.Phrase, joke.Phrase) || strings.Contains(joke.Phrase, existing.Phrase) {
+				if existing.Occurrences == joke.Occurrences || existing.OriginID == joke.OriginID {
+					duplicate = true
+					break
+				}
+			}
+		}
+		if !duplicate {
+			kept = append(kept, joke)
+		}
+	}
+	return kept
+}
+
 func departureStatus(days int) (string, string) {
 	switch {
 	case days > 180:
@@ -380,7 +541,7 @@ func departureStatus(days int) (string, string) {
 }
 
 func titleFromKeywords(keywords []string) string {
-	words := keywords
+	words := append([]string(nil), keywords...)
 	if len(words) > 3 {
 		words = words[:3]
 	}

@@ -1,5 +1,7 @@
 import {
+  AlertTriangle,
   CalendarClock,
+  CircleHelp,
   GitFork,
   Github,
   HeartHandshake,
@@ -52,6 +54,8 @@ export function App() {
   }
 
   const data = dashboard.data;
+  const warnings = data.warnings ?? [];
+  const debugMode = new URLSearchParams(window.location.search).has('debug');
   const activeMembers = members.length === 0 ? data.members.map((member) => member.name) : members;
   const filtered = filterData(data, search, activeMembers);
 
@@ -139,6 +143,8 @@ export function App() {
           </nav>
 
           <div className="mt-5">
+            {warnings.length > 0 && <WarningPanel warnings={warnings} />}
+            {debugMode && <DebugPanel data={data} />}
             {view === 'timeline' && <Timeline topics={filtered.topics} />}
             {view === 'map' && <MapView data={data} introductions={filtered.introductions} />}
             {view === 'jokes' && <Jokes jokes={filtered.insideJokes} />}
@@ -186,10 +192,14 @@ function Header({ data, updatedAt }: { data: Dashboard; updatedAt: string }) {
           </a>
         </div>
       </div>
-      <div className="mx-auto grid w-full max-w-7xl gap-3 px-4 pb-5 md:grid-cols-4">
+      <div className="mx-auto grid w-full max-w-7xl gap-3 px-4 pb-5 md:grid-cols-5">
         <Metric label="Messages" value={data.source.messageCount.toLocaleString()} />
         <Metric label="Members" value={data.source.memberCount.toLocaleString()} />
         <Metric label="Topics" value={data.topics.length.toLocaleString()} />
+        <Metric
+          label="Warnings"
+          value={(data.source.warningCount ?? data.warnings?.length ?? 0).toLocaleString()}
+        />
         <Metric label="Updated" value={daysAgo(updatedAt)} />
       </div>
     </header>
@@ -211,9 +221,14 @@ function SourcePanel({ data }: { data: Dashboard }) {
       <h2 className="font-semibold uppercase tracking-wide text-ink/60">Artifact</h2>
       <dl className="mt-3 grid gap-2">
         <Info label="Schema" value={data.schemaVersion} />
-        <Info label="Parser" value={`${data.source.parser} via ${data.source.extractionMode}`} />
+        <Info
+          label="Adapter"
+          value={`${data.source.adapter ?? data.source.parser} (${percent(data.source.adapterConfidence)})`}
+        />
+        <Info label="Extract" value={data.source.extractionMode} />
         <Info label="Analytics" value={data.source.analyticsEngine} />
         <Info label="LLM" value={data.source.llmUsed ? data.source.llmModel : 'heuristic fallback'} />
+        <Info label="Warnings" value={`${data.source.warningCount ?? data.warnings?.length ?? 0}`} />
         <Info label="Input SHA" value={data.source.inputSha256.slice(0, 10)} />
       </dl>
     </div>
@@ -225,6 +240,69 @@ function Info({ label, value }: { label: string; value: string }) {
     <div className="flex items-center justify-between gap-3">
       <dt className="text-ink/50">{label}</dt>
       <dd className="max-w-[150px] truncate font-mono text-xs text-ink">{value}</dd>
+    </div>
+  );
+}
+
+function WarningPanel({ warnings }: { warnings: NonNullable<Dashboard['warnings']> }) {
+  const topWarnings = warnings.slice(0, 4);
+  return (
+    <section className="mb-5 rounded-md border border-rust/25 bg-rust/5 p-4">
+      <h2 className="flex items-center gap-2 text-sm font-black uppercase tracking-wide text-rust">
+        <AlertTriangle className="h-4 w-4" aria-hidden="true" />
+        Import Warnings
+      </h2>
+      <div className="mt-3 grid gap-3">
+        {topWarnings.map((warning, index) => (
+          <article key={`${warning.code}-${warning.line ?? index}`} className="text-sm leading-6 text-ink/75">
+            <div className="font-bold text-ink">
+              {warning.message}
+              {warning.line ? (
+                <span className="font-mono text-xs text-ink/45"> line {warning.line}</span>
+              ) : null}
+            </div>
+            <div>{warning.why}</div>
+            <div className="font-semibold text-rust">{warning.nextStep}</div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function DebugPanel({ data }: { data: Dashboard }) {
+  return (
+    <section className="mb-5 rounded-md border border-lake/25 bg-lake/5 p-4 text-sm text-ink/75">
+      <h2 className="font-black uppercase tracking-wide text-lake">Debug</h2>
+      <dl className="mt-3 grid gap-2 md:grid-cols-2">
+        <Info label="Adapter evidence" value={(data.debug?.adapterEvidence ?? []).join('; ') || 'none'} />
+        <Info label="Normalize" value={(data.source.normalizationSteps ?? []).join('; ') || 'none'} />
+        <Info
+          label="Parameters"
+          value={
+            Object.entries(data.source.parameters ?? {})
+              .map(([k, v]) => `${k}=${v}`)
+              .join('; ') || 'none'
+          }
+        />
+        <Info label="App version" value={data.source.appVersion ?? __APP_VERSION__} />
+      </dl>
+    </section>
+  );
+}
+
+function ConfidenceBadge({ confidence }: { confidence?: TopicPeriod['confidence'] }) {
+  if (!confidence) {
+    return null;
+  }
+  const title = confidence.evidence.join('\n');
+  return (
+    <div
+      className="mt-2 inline-flex items-center gap-1 rounded-md border border-ink/10 px-2 py-1 text-xs font-bold text-ink/60"
+      title={title}
+    >
+      <CircleHelp className="h-3.5 w-3.5" aria-hidden="true" />
+      {confidence.level} {Math.round(confidence.score * 100)}%
     </div>
   );
 }
@@ -246,6 +324,7 @@ function Timeline({ topics }: { topics: TopicPeriod[] }) {
           </div>
           <div className="min-w-0">
             <h2 className="text-xl font-black text-ink">{topic.label}</h2>
+            <ConfidenceBadge confidence={topic.confidence} />
             <p className="mt-2 text-sm leading-6 text-ink/70">{topic.summary}</p>
             <div className="mt-3 flex flex-wrap gap-2">
               {topic.keywords.map((keyword) => (
@@ -307,6 +386,7 @@ function MapView({ data, introductions }: { data: Dashboard; introductions: Intr
             <h3 className="mt-2 text-lg font-black">
               {edge.from} introduced {edge.to}
             </h3>
+            <ConfidenceBadge confidence={edge.confidence} />
             <p className="mt-2 text-sm leading-6 text-ink/70">{edge.snippet}</p>
           </article>
         ))}
@@ -329,6 +409,7 @@ function Jokes({ jokes }: { jokes: InsideJoke[] }) {
               {joke.occurrences}x
             </span>
           </div>
+          <ConfidenceBadge confidence={joke.confidence} />
           <p className="mt-3 text-sm leading-6 text-ink/70">{joke.snippet}</p>
           <div className="mt-4 text-sm text-ink/60">
             Origin: <strong className="text-ink">{joke.originSender}</strong> on {formatDate(joke.originAt)}
@@ -370,6 +451,7 @@ function Departures({ departures }: { departures: Departure[] }) {
           </div>
           <div>
             <p className="text-sm leading-6 text-ink/70">{departure.interpretation}</p>
+            <ConfidenceBadge confidence={departure.confidence} />
             <p className="mt-2 text-sm italic text-ink/60">{departure.lastSnippet}</p>
           </div>
           <div className="text-left md:text-right">
@@ -470,4 +552,11 @@ function statusClass(status: string) {
     return 'bg-wheat/35 text-ink';
   }
   return 'bg-moss/10 text-moss';
+}
+
+function percent(value?: number) {
+  if (typeof value !== 'number') {
+    return 'n/a';
+  }
+  return `${Math.round(value * 100)}%`;
 }

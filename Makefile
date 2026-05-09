@@ -4,7 +4,7 @@ INPUT_PATH ?= ./testdata/sample_chat.txt
 OUTPUT_DIR ?= ./docs/data/v1
 PAGES_DIR ?= ./docs
 WEB_DIR ?= ./web
-VERSION ?= v0.1.0
+VERSION ?= v0.2.0
 GO_PACKAGES := ./cmd/... ./internal/...
 
 .PHONY: help install-hooks dev build data test test-integration smoke lint fmt pages-preview release clean hooks-pre-commit hooks-commit-msg hooks-pre-push hooks-post-merge hooks-post-checkout
@@ -37,7 +37,7 @@ test-integration: ## run integration tests
 	go test -tags=integration $(GO_PACKAGES)
 
 smoke: ## build, serve docs/, and run Playwright smoke
-	./scripts/smoke.sh
+	bash ./scripts/smoke.sh
 
 lint: ## run linters and type checks
 	gofmt -w cmd internal

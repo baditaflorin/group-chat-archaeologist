@@ -1,22 +1,33 @@
 {
   "schemaVersion": "v1",
-  "generatedAt": "2026-05-08T08:42:38Z",
+  "generatedAt": "2026-05-09T10:20:19Z",
   "repositoryUrl": "https://github.com/baditaflorin/group-chat-archaeologist",
   "paypalUrl": "https://www.paypal.com/paypalme/florinbadita",
   "source": {
     "inputName": "sample_chat.txt",
     "inputSha256": "0e6603b28c83aadb7f333629a2dd76ebe30fcd4caee2826c4cf692ccad838f7c",
-    "parser": "text",
+    "parser": "whatsapp_text",
+    "adapter": "whatsapp_text",
+    "adapterConfidence": 0.97,
     "extractionMode": "txt",
+    "normalizationSteps": [
+      "decoded UTF-8"
+    ],
     "analyticsEngine": "duckdb-cli",
     "messageCount": 29,
     "memberCount": 6,
     "firstMessageAt": "2021-01-03T07:00:00Z",
     "lastMessageAt": "2025-06-05T13:45:00Z",
+    "warningCount": 0,
     "llmProvider": "heuristic",
     "llmModel": "llama3.2",
     "llmUsed": false,
-    "sourceCommit": "f161916"
+    "sourceCommit": "6d04ae0",
+    "appVersion": "0.2.0",
+    "parameters": {
+      "concurrency": "4",
+      "saveEvery": "5000"
+    }
   },
   "members": [
     {
@@ -64,9 +75,9 @@
       "end": "2021-01-31",
       "messageCount": 3,
       "keywords": [
-        "Accept",
-        "An",
-        "Archive",
+        "accept",
+        "an",
+        "archive",
         "bogdan",
         "every"
       ],
@@ -74,7 +85,15 @@
         "Ana",
         "Bogdan"
       ],
-      "summary": "3 messages led by Ana, Bogdan."
+      "summary": "3 messages led by Ana, Bogdan.",
+      "confidence": {
+        "score": 0.63,
+        "level": "medium",
+        "evidence": [
+          "month bucket 2021-01 contains 3 parsed messages",
+          "top keywords: accept, an, archive, bogdan, every"
+        ]
+      }
     },
     {
       "id": "topic_2021_02",
@@ -83,9 +102,9 @@
       "end": "2021-02-28",
       "messageCount": 3,
       "keywords": [
-        "First",
-        "Lighthouse",
-        "Playlist",
+        "first",
+        "lighthouse",
+        "playlist",
         "spreadsheet",
         "came"
       ],
@@ -94,7 +113,15 @@
         "Bogdan",
         "Carmen"
       ],
-      "summary": "3 messages led by Ana, Bogdan, Carmen."
+      "summary": "3 messages led by Ana, Bogdan, Carmen.",
+      "confidence": {
+        "score": 0.63,
+        "level": "medium",
+        "evidence": [
+          "month bucket 2021-02 contains 3 parsed messages",
+          "top keywords: first, lighthouse, playlist, spreadsheet, came"
+        ]
+      }
     },
     {
       "id": "topic_2021_05",
@@ -103,9 +130,9 @@
       "end": "2021-05-31",
       "messageCount": 2,
       "keywords": [
-        "Bring",
-        "Calendar",
-        "Daria",
+        "bring",
+        "calendar",
+        "daria",
         "discipline",
         "invited"
       ],
@@ -113,7 +140,15 @@
         "Carmen",
         "Daria"
       ],
-      "summary": "2 messages led by Carmen, Daria."
+      "summary": "2 messages led by Carmen, Daria.",
+      "confidence": {
+        "score": 0.6,
+        "level": "medium",
+        "evidence": [
+          "month bucket 2021-05 contains 2 parsed messages",
+          "top keywords: bring, calendar, daria, discipline, invited"
+        ]
+      }
     },
     {
       "id": "topic_2021_07",
@@ -122,9 +157,9 @@
       "end": "2021-07-31",
       "messageCount": 2,
       "keywords": [
-        "Map",
-        "Of",
-        "Becomes",
+        "map",
+        "of",
+        "becomes",
         "before",
         "chat"
       ],
@@ -132,7 +167,15 @@
         "Ana",
         "Florin"
       ],
-      "summary": "2 messages led by Ana, Florin."
+      "summary": "2 messages led by Ana, Florin.",
+      "confidence": {
+        "score": 0.6,
+        "level": "medium",
+        "evidence": [
+          "month bucket 2021-07 contains 2 parsed messages",
+          "top keywords: map, of, becomes, before, chat"
+        ]
+      }
     },
     {
       "id": "topic_2021_08",
@@ -141,9 +184,9 @@
       "end": "2021-08-31",
       "messageCount": 3,
       "keywords": [
-        "Compass",
-        "Sandwich",
-        "Argue",
+        "compass",
+        "sandwich",
+        "argue",
         "buses",
         "got"
       ],
@@ -152,7 +195,15 @@
         "Carmen",
         "Daria"
       ],
-      "summary": "3 messages led by Bogdan, Carmen, Daria."
+      "summary": "3 messages led by Bogdan, Carmen, Daria.",
+      "confidence": {
+        "score": 0.63,
+        "level": "medium",
+        "evidence": [
+          "month bucket 2021-08 contains 3 parsed messages",
+          "top keywords: compass, sandwich, argue, buses, got"
+        ]
+      }
     },
     {
       "id": "topic_2022_01",
@@ -161,9 +212,9 @@
       "end": "2022-01-31",
       "messageCount": 2,
       "keywords": [
-        "First",
-        "Found",
-        "Lighthouse",
+        "first",
+        "found",
+        "lighthouse",
         "mihai",
         "note"
       ],
@@ -171,7 +222,15 @@
         "Florin",
         "Mihai"
       ],
-      "summary": "2 messages led by Florin, Mihai."
+      "summary": "2 messages led by Florin, Mihai.",
+      "confidence": {
+        "score": 0.6,
+        "level": "medium",
+        "evidence": [
+          "month bucket 2022-01 contains 2 parsed messages",
+          "top keywords: first, found, lighthouse, mihai, note"
+        ]
+      }
     },
     {
       "id": "topic_2022_04",
@@ -180,9 +239,9 @@
       "end": "2022-04-30",
       "messageCount": 2,
       "keywords": [
-        "Eras",
-        "First",
-        "People",
+        "eras",
+        "first",
+        "people",
         "archive",
         "both"
       ],
@@ -190,7 +249,15 @@
         "Ana",
         "Florin"
       ],
-      "summary": "2 messages led by Ana, Florin."
+      "summary": "2 messages led by Ana, Florin.",
+      "confidence": {
+        "score": 0.6,
+        "level": "medium",
+        "evidence": [
+          "month bucket 2022-04 contains 2 parsed messages",
+          "top keywords: eras, first, people, archive, both"
+        ]
+      }
     },
     {
       "id": "topic_2022_09",
@@ -199,16 +266,24 @@
       "end": "2022-09-30",
       "messageCount": 1,
       "keywords": [
-        "Become",
-        "Compass",
-        "Decision",
+        "become",
+        "compass",
+        "decision",
         "framework",
         "sandwich"
       ],
       "topMembers": [
         "Daria"
       ],
-      "summary": "1 messages led by Daria."
+      "summary": "1 messages led by Daria.",
+      "confidence": {
+        "score": 0.58,
+        "level": "low",
+        "evidence": [
+          "month bucket 2022-09 contains 1 parsed messages",
+          "top keywords: become, compass, decision, framework, sandwich"
+        ]
+      }
     },
     {
       "id": "topic_2023_02",
@@ -217,9 +292,9 @@
       "end": "2023-02-28",
       "messageCount": 2,
       "keywords": [
-        "Index",
-        "Sarmale",
-        "Absurdly",
+        "index",
+        "sarmale",
+        "absurdly",
         "accurate",
         "ambition"
       ],
@@ -227,7 +302,15 @@
         "Bogdan",
         "Carmen"
       ],
-      "summary": "2 messages led by Bogdan, Carmen."
+      "summary": "2 messages led by Bogdan, Carmen.",
+      "confidence": {
+        "score": 0.6,
+        "level": "medium",
+        "evidence": [
+          "month bucket 2023-02 contains 2 parsed messages",
+          "top keywords: index, sarmale, absurdly, accurate, ambition"
+        ]
+      }
     },
     {
       "id": "topic_2023_03",
@@ -236,16 +319,24 @@
       "end": "2023-03-31",
       "messageCount": 1,
       "keywords": [
-        "According",
-        "Index",
-        "Is",
+        "according",
+        "index",
+        "is",
         "sarmale",
         "serious"
       ],
       "topMembers": [
         "Mihai"
       ],
-      "summary": "1 messages led by Mihai."
+      "summary": "1 messages led by Mihai.",
+      "confidence": {
+        "score": 0.58,
+        "level": "low",
+        "evidence": [
+          "month bucket 2023-03 contains 1 parsed messages",
+          "top keywords: according, index, is, sarmale, serious"
+        ]
+      }
     },
     {
       "id": "topic_2023_11",
@@ -254,16 +345,24 @@
       "end": "2023-11-30",
       "messageCount": 1,
       "keywords": [
-        "Era",
-        "Jokes",
-        "Lighthouse",
+        "era",
+        "jokes",
+        "lighthouse",
         "of",
         "spreadsheet"
       ],
       "topMembers": [
         "Ana"
       ],
-      "summary": "1 messages led by Ana."
+      "summary": "1 messages led by Ana.",
+      "confidence": {
+        "score": 0.58,
+        "level": "low",
+        "evidence": [
+          "month bucket 2023-11 contains 1 parsed messages",
+          "top keywords: era, jokes, lighthouse, of, spreadsheet"
+        ]
+      }
     },
     {
       "id": "topic_2024_02",
@@ -272,16 +371,24 @@
       "end": "2024-02-29",
       "messageCount": 1,
       "keywords": [
-        "Edges",
-        "Graph",
-        "Introduced",
+        "edges",
+        "graph",
+        "introduced",
         "memory",
         "should"
       ],
       "topMembers": [
         "Florin"
       ],
-      "summary": "1 messages led by Florin."
+      "summary": "1 messages led by Florin.",
+      "confidence": {
+        "score": 0.58,
+        "level": "low",
+        "evidence": [
+          "month bucket 2024-02 contains 1 parsed messages",
+          "top keywords: edges, graph, introduced, memory, should"
+        ]
+      }
     },
     {
       "id": "topic_2024_04",
@@ -290,16 +397,24 @@
       "end": "2024-04-30",
       "messageCount": 1,
       "keywords": [
-        "Archive",
-        "Go",
-        "Keep",
+        "archive",
+        "go",
+        "keep",
         "might",
         "quiet"
       ],
       "topMembers": [
         "Carmen"
       ],
-      "summary": "1 messages led by Carmen."
+      "summary": "1 messages led by Carmen.",
+      "confidence": {
+        "score": 0.58,
+        "level": "low",
+        "evidence": [
+          "month bucket 2024-04 contains 1 parsed messages",
+          "top keywords: archive, go, keep, might, quiet"
+        ]
+      }
     },
     {
       "id": "topic_2024_05",
@@ -308,16 +423,24 @@
       "end": "2024-05-31",
       "messageCount": 1,
       "keywords": [
-        "Lighthouse",
-        "Noted",
-        "Remains",
+        "lighthouse",
+        "noted",
+        "remains",
         "spreadsheet",
         "warm"
       ],
       "topMembers": [
         "Bogdan"
       ],
-      "summary": "1 messages led by Bogdan."
+      "summary": "1 messages led by Bogdan.",
+      "confidence": {
+        "score": 0.58,
+        "level": "low",
+        "evidence": [
+          "month bucket 2024-05 contains 1 parsed messages",
+          "top keywords: lighthouse, noted, remains, spreadsheet, warm"
+        ]
+      }
     },
     {
       "id": "topic_2024_11",
@@ -326,16 +449,24 @@
       "end": "2024-11-30",
       "messageCount": 1,
       "keywords": [
-        "Choose",
-        "Compass",
-        "Earlier",
+        "choose",
+        "compass",
+        "earlier",
         "sandwich",
         "says"
       ],
       "topMembers": [
         "Daria"
       ],
-      "summary": "1 messages led by Daria."
+      "summary": "1 messages led by Daria.",
+      "confidence": {
+        "score": 0.58,
+        "level": "low",
+        "evidence": [
+          "month bucket 2024-11 contains 1 parsed messages",
+          "top keywords: choose, compass, earlier, sandwich, says"
+        ]
+      }
     },
     {
       "id": "topic_2025_01",
@@ -344,15 +475,23 @@
       "end": "2025-01-31",
       "messageCount": 1,
       "keywords": [
-        "Debates",
-        "Index",
-        "Miss",
+        "debates",
+        "index",
+        "miss",
         "sarmale"
       ],
       "topMembers": [
         "Mihai"
       ],
-      "summary": "1 messages led by Mihai."
+      "summary": "1 messages led by Mihai.",
+      "confidence": {
+        "score": 0.58,
+        "level": "low",
+        "evidence": [
+          "month bucket 2025-01 contains 1 parsed messages",
+          "top keywords: debates, index, miss, sarmale"
+        ]
+      }
     },
     {
       "id": "topic_2025_06",
@@ -361,9 +500,9 @@
       "end": "2025-06-30",
       "messageCount": 2,
       "keywords": [
-        "Link",
-        "Map",
-        "Another",
+        "link",
+        "map",
+        "another",
         "archive",
         "is"
       ],
@@ -371,7 +510,15 @@
         "Ana",
         "Florin"
       ],
-      "summary": "2 messages led by Ana, Florin."
+      "summary": "2 messages led by Ana, Florin.",
+      "confidence": {
+        "score": 0.6,
+        "level": "medium",
+        "evidence": [
+          "month bucket 2025-06 contains 2 parsed messages",
+          "top keywords: link, map, another, archive, is"
+        ]
+      }
     }
   ],
   "introductions": [
@@ -380,35 +527,75 @@
       "to": "Bogdan",
       "firstMentionAt": "2021-01-03T07:04:00Z",
       "messageId": "m_000002",
-      "snippet": "I invited Bogdan because he remembers every train platform."
+      "snippet": "I invited Bogdan because he remembers every train platform.",
+      "confidence": {
+        "score": 0.78,
+        "level": "medium",
+        "evidence": [
+          "Bogdan was mentioned before their first message",
+          "first Bogdan message was at 2021-01-03T07:12:00Z"
+        ]
+      }
     },
     {
       "from": "Ana",
       "to": "Carmen",
       "firstMentionAt": "2021-02-11T18:15:00Z",
       "messageId": "m_000004",
-      "snippet": "Carmen would know where the first shared playlist came from."
+      "snippet": "Carmen would know where the first shared playlist came from.",
+      "confidence": {
+        "score": 0.78,
+        "level": "medium",
+        "evidence": [
+          "Carmen was mentioned before their first message",
+          "first Carmen message was at 2021-02-11T18:20:00Z"
+        ]
+      }
     },
     {
       "from": "Carmen",
       "to": "Daria",
       "firstMentionAt": "2021-05-02T07:30:00Z",
       "messageId": "m_000007",
-      "snippet": "I invited Daria for the picnic logistics."
+      "snippet": "I invited Daria for the picnic logistics.",
+      "confidence": {
+        "score": 0.78,
+        "level": "medium",
+        "evidence": [
+          "Daria was mentioned before their first message",
+          "first Daria message was at 2021-05-02T07:35:00Z"
+        ]
+      }
     },
     {
       "from": "Ana",
       "to": "Florin",
       "firstMentionAt": "2021-07-19T15:22:00Z",
       "messageId": "m_000009",
-      "snippet": "Florin should see this map idea before it becomes folklore."
+      "snippet": "Florin should see this map idea before it becomes folklore.",
+      "confidence": {
+        "score": 0.78,
+        "level": "medium",
+        "evidence": [
+          "Florin was mentioned before their first message",
+          "first Florin message was at 2021-07-19T15:25:00Z"
+        ]
+      }
     },
     {
       "from": "Florin",
       "to": "Mihai",
       "firstMentionAt": "2022-01-14T10:18:00Z",
       "messageId": "m_000014",
-      "snippet": "Mihai has the screenshots from the first planning weekend."
+      "snippet": "Mihai has the screenshots from the first planning weekend.",
+      "confidence": {
+        "score": 0.78,
+        "level": "medium",
+        "evidence": [
+          "Mihai was mentioned before their first message",
+          "first Mihai message was at 2022-01-14T10:24:00Z"
+        ]
+      }
     }
   ],
   "insideJokes": [
@@ -424,7 +611,15 @@
         "Carmen",
         "Mihai"
       ],
-      "snippet": "The first playlist was definitely the lighthouse spreadsheet era."
+      "snippet": "The first playlist was definitely the lighthouse spreadsheet era.",
+      "confidence": {
+        "score": 0.9,
+        "level": "high",
+        "evidence": [
+          "phrase repeated 5 times",
+          "used by 4 participants"
+        ]
+      }
     },
     {
       "phrase": "sandwich compass",
@@ -437,7 +632,15 @@
         "Carmen",
         "Daria"
       ],
-      "snippet": "The sandwich compass points north again."
+      "snippet": "The sandwich compass points north again.",
+      "confidence": {
+        "score": 0.9,
+        "level": "high",
+        "evidence": [
+          "phrase repeated 5 times",
+          "used by 3 participants"
+        ]
+      }
     },
     {
       "phrase": "the sandwich",
@@ -450,46 +653,15 @@
         "Carmen",
         "Daria"
       ],
-      "snippet": "The sandwich compass points north again."
-    },
-    {
-      "phrase": "the sandwich compass",
-      "originAt": "2021-08-03T18:00:00Z",
-      "originSender": "Daria",
-      "originId": "m_000011",
-      "occurrences": 4,
-      "participants": [
-        "Bogdan",
-        "Carmen",
-        "Daria"
-      ],
-      "snippet": "The sandwich compass points north again."
-    },
-    {
-      "phrase": "sarmale index",
-      "originAt": "2023-02-01T06:32:00Z",
-      "originSender": "Bogdan",
-      "originId": "m_000019",
-      "occurrences": 4,
-      "participants": [
-        "Bogdan",
-        "Carmen",
-        "Mihai"
-      ],
-      "snippet": "I propose the sarmale index for measuring gathering ambition."
-    },
-    {
-      "phrase": "the sarmale",
-      "originAt": "2023-02-01T06:32:00Z",
-      "originSender": "Bogdan",
-      "originId": "m_000019",
-      "occurrences": 4,
-      "participants": [
-        "Bogdan",
-        "Carmen",
-        "Mihai"
-      ],
-      "snippet": "I propose the sarmale index for measuring gathering ambition."
+      "snippet": "The sandwich compass points north again.",
+      "confidence": {
+        "score": 0.9,
+        "level": "high",
+        "evidence": [
+          "phrase repeated 4 times",
+          "used by 3 participants"
+        ]
+      }
     },
     {
       "phrase": "the sarmale index",
@@ -502,7 +674,15 @@
         "Carmen",
         "Mihai"
       ],
-      "snippet": "I propose the sarmale index for measuring gathering ambition."
+      "snippet": "I propose the sarmale index for measuring gathering ambition.",
+      "confidence": {
+        "score": 0.9,
+        "level": "high",
+        "evidence": [
+          "phrase repeated 4 times",
+          "used by 3 participants"
+        ]
+      }
     },
     {
       "phrase": "the first",
@@ -515,7 +695,75 @@
         "Carmen",
         "Florin"
       ],
-      "snippet": "Carmen would know where the first shared playlist came from."
+      "snippet": "Carmen would know where the first shared playlist came from.",
+      "confidence": {
+        "score": 0.9,
+        "level": "high",
+        "evidence": [
+          "phrase repeated 3 times",
+          "used by 3 participants"
+        ]
+      }
+    },
+    {
+      "phrase": "the lighthouse",
+      "originAt": "2021-02-11T18:20:00Z",
+      "originSender": "Carmen",
+      "originId": "m_000005",
+      "occurrences": 3,
+      "participants": [
+        "Bogdan",
+        "Carmen"
+      ],
+      "snippet": "The first playlist was definitely the lighthouse spreadsheet era.",
+      "confidence": {
+        "score": 0.87,
+        "level": "high",
+        "evidence": [
+          "phrase repeated 3 times",
+          "used by 2 participants"
+        ]
+      }
+    },
+    {
+      "phrase": "the archive",
+      "originAt": "2022-04-21T14:05:00Z",
+      "originSender": "Ana",
+      "originId": "m_000016",
+      "occurrences": 3,
+      "participants": [
+        "Ana",
+        "Carmen"
+      ],
+      "snippet": "Spring topic: should the archive map show eras or people first?",
+      "confidence": {
+        "score": 0.87,
+        "level": "high",
+        "evidence": [
+          "phrase repeated 3 times",
+          "used by 2 participants"
+        ]
+      }
+    },
+    {
+      "phrase": "people first",
+      "originAt": "2022-04-21T14:05:00Z",
+      "originSender": "Ana",
+      "originId": "m_000016",
+      "occurrences": 2,
+      "participants": [
+        "Ana",
+        "Florin"
+      ],
+      "snippet": "Spring topic: should the archive map show eras or people first?",
+      "confidence": {
+        "score": 0.78,
+        "level": "medium",
+        "evidence": [
+          "phrase repeated 2 times",
+          "used by 2 participants"
+        ]
+      }
     }
   ],
   "departures": [
@@ -526,7 +774,15 @@
       "daysSinceActive": 418,
       "activeSpanDays": 1155,
       "lastSnippet": "I might go quiet for a while, but keep the archive warm.",
-      "interpretation": "No recent activity in the observed archive window."
+      "interpretation": "No recent activity in the observed archive window.",
+      "confidence": {
+        "score": 0.98,
+        "level": "high",
+        "evidence": [
+          "last message is 418 days before archive end",
+          "5 messages across 1155 active days"
+        ]
+      }
     },
     {
       "member": "Bogdan",
@@ -535,7 +791,15 @@
       "daysSinceActive": 395,
       "activeSpanDays": 1218,
       "lastSnippet": "Noted. The lighthouse spreadsheet remains warm.",
-      "interpretation": "No recent activity in the observed archive window."
+      "interpretation": "No recent activity in the observed archive window.",
+      "confidence": {
+        "score": 0.98,
+        "level": "high",
+        "evidence": [
+          "last message is 395 days before archive end",
+          "5 messages across 1218 active days"
+        ]
+      }
     },
     {
       "member": "Daria",
@@ -544,7 +808,15 @@
       "daysSinceActive": 186,
       "activeSpanDays": 1308,
       "lastSnippet": "Sandwich compass says we choose the earlier train.",
-      "interpretation": "No recent activity in the observed archive window."
+      "interpretation": "No recent activity in the observed archive window.",
+      "confidence": {
+        "score": 0.98,
+        "level": "high",
+        "evidence": [
+          "last message is 186 days before archive end",
+          "4 messages across 1308 active days"
+        ]
+      }
     },
     {
       "member": "Mihai",
@@ -553,7 +825,15 @@
       "daysSinceActive": 141,
       "activeSpanDays": 1096,
       "lastSnippet": "I miss the sarmale index debates.",
-      "interpretation": "Activity faded before the archive ended."
+      "interpretation": "Activity faded before the archive ended.",
+      "confidence": {
+        "score": 0.9,
+        "level": "high",
+        "evidence": [
+          "last message is 141 days before archive end",
+          "3 messages across 1096 active days"
+        ]
+      }
     },
     {
       "member": "Ana",
@@ -562,7 +842,15 @@
       "daysSinceActive": 0,
       "activeSpanDays": 1614,
       "lastSnippet": "The archive map is ready for another pass.",
-      "interpretation": "Still active near the end of the archive."
+      "interpretation": "Still active near the end of the archive.",
+      "confidence": {
+        "score": 0.76,
+        "level": "medium",
+        "evidence": [
+          "last message is 0 days before archive end",
+          "7 messages across 1614 active days"
+        ]
+      }
     },
     {
       "member": "Florin",
@@ -571,7 +859,15 @@
       "daysSinceActive": 0,
       "activeSpanDays": 1416,
       "lastSnippet": "Ship the map with a repository link and a support link.",
-      "interpretation": "Still active near the end of the archive."
+      "interpretation": "Still active near the end of the archive.",
+      "confidence": {
+        "score": 0.76,
+        "level": "medium",
+        "evidence": [
+          "last message is 0 days before archive end",
+          "5 messages across 1416 active days"
+        ]
+      }
     }
   ],
   "notableMessages": [
@@ -632,6 +928,13 @@
       "why": "Longest message in the archive."
     }
   ],
+  "warnings": [],
+  "debug": {
+    "adapterEvidence": [
+      "line-oriented export with timestamp, sender, and message text"
+    ],
+    "parseWarnings": 0
+  },
   "graph": {
     "dotPath": "data/v1/who-introduced-whom.dot",
     "svgPath": "data/v1/who-introduced-whom.svg",

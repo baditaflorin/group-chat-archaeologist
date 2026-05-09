@@ -96,3 +96,24 @@ For Group Chat Archaeologist, smart means:
 - No full local LLM topic-modeling overhaul before parser correctness, confidence, and determinism are fixed.
 - No private real chat data committed to the repository.
 - No Phase 2 ADRs, picklist, fixture commits, or implementation until this audit is confirmed.
+
+## Post-Implementation Fixture Status
+
+Updated: 2026-05-09
+
+The committed fixture suite in `test/fixtures/realdata/` now runs as part of `go test ./...`.
+
+| Fixture | Before | After | Notes |
+|---|---:|---:|---|
+| 01 WhatsApp US clean TXT | Pass with noisy jokes | Pass | Inside-joke duplicate pruning and confidence make low-evidence results visible. |
+| 02 WhatsApp system/multiline/media | Wrong-but-confident | Pass | System messages and media placeholders surface as warnings. |
+| 03 WhatsApp EU hyphen date | Fail | Pass | Day-first hyphen dates are recognized by the WhatsApp adapter. |
+| 04 WhatsApp iOS BOM/bracket/CRLF | Fail | Pass | BOM and CRLF are normalized before parsing; iOS bracket lines parse directly. |
+| 05 Telegram Desktop JSON | Fail | Pass | Telegram `messages[]`, service events, and rich text arrays are handled. |
+| 06 Slack channel JSON | Fail | Pass | Slack `ts`, `user`, subtypes, and unresolved mentions are handled with warnings. |
+| 07 DiscordChatExporter CSV | Fail | Pass | CSV headers and quoted multiline message fields are parsed with `encoding/csv`. |
+| 08 Telegram HTML export | Fail | Pass | `.html` is treated as text and Telegram message blocks are parsed directly. |
+| 09 Truncated WhatsApp line | Wrong-but-confident | Pass | Timestamp-like malformed lines are warnings, not message continuations. |
+| 10 20,000-message WhatsApp TXT | Pass with weak trust | Pass | Large input emits a warning and completes under the Phase 2 budget. |
+
+Current pass rate: 10/10 primary flow, 10/10 useful-without-manual-conversion, 0/10 wrong-but-confident fixture cases.
